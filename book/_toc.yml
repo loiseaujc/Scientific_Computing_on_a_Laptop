@@ -1,0 +1,70 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: Cover
+parts:
+  - caption: Front Matter
+    chapters:
+    - file: FrontMatter/acknowledgements
+    - file: FrontMatter/table_of_content
+
+  - caption: About this book
+    chapters:
+      - file: About/about
+      - file: About/what_do_i_need
+
+  - caption: The Holy Trinity
+    chapters:
+      - file: Quick_Tours/Overview
+        title: Overview
+      # - file: Quick_Tours/NumPy
+      # - file: Quick_Tours/SciPy
+      # - file: Quick_Tours/Matplotlib
+
+  - caption: Large-scale linear algebra
+    chapters:
+      - file: Linalg/Overview
+        title: Overview
+ 
+  - caption: Applications in Physics
+    chapters:
+      - file: Physics/Overview
+        title: Overview
+      # - file: Physics/Ising/Ising_model
+      #   sections:
+      #     - file: Physics/Ising/naive
+      - file: Physics/NBody/NBody
+        sections:
+          - file: Physics/NBody/formulation
+          - file: Physics/NBody/pairwise_distance
+            sections:
+              - file: Physics/NBody/naive
+              - file: Physics/NBody/vectorized
+          - file: Physics/NBody/simulation
+      # - file: Physics/Schrodinger/Schrodinger
+      #   sections:
+      #     - file: Physics/Schrodinger/naive
+      # - file: Physics/2D_Turbulence/2D_Turbulence
+      #   sections:
+      #     - file: Physics/2D_Turbulence/naive
+
+  - caption: Applications in Maths
+    chapters:
+      - file: Maths/Overview
+        title: Overview
+      # - file: Maths/Mandelbrot
+      # - file: Maths/Logistic_map
+      # - file: Maths/Lorenz
+      # - file: Maths/Wolfram
+      # - file: Maths/GameOfLife
+
+  - caption: Applications in Biology
+    chapters:
+      - file: Biology/Overview
+        title: Overview
+
+  - caption: Applications in Mechanics
+    chapters:
+      - file: Mechanics/Overview
+        title: Overview
