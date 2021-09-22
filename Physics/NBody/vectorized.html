@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vectorized implementation &#8212; Scientific computing on a Laptop</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Full code for an N-Body simulation" href="simulation.html" />
+    <link rel="prev" title="Implementation based on nested for loops" href="naive.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific computing on a Laptop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Cover.html">
+   Scientific Computing on a Laptop
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Front Matter
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/table_of_content.html">
+   Table of Contents
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About this book
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/about.html">
+   What is this book?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/what_do_i_need.html">
+   What do I need?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  The Holy Trinity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Quick_Tours/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Large-scale linear algebra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Linalg/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Physics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="NBody.html">
+   N-Body simulations
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="formulation.html">
+     General formulation
+    </a>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="pairwise_distance.html">
+     Computing the pairwise interactions
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="naive.html">
+       Implementation based on nested
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         for
+        </span>
+       </code>
+       loops
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Vectorized implementation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="simulation.html">
+     Full code for an N-Body simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Maths
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Maths/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Biology
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Biology/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Mechanics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Mechanics/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/Physics/NBody/vectorized.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Physics/NBody/vectorized.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPhysics/NBody/vectorized.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Physics/NBody/vectorized.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-the-pairwise-distance-of-n-points-in-mathbb-r-m">
+   Computing the pairwise distance of
+   <span class="math notranslate nohighlight">
+    \(n\)
+   </span>
+   points in
+   <span class="math notranslate nohighlight">
+    \(\mathbb{R}^m\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-the-code">
+   Back to the code
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="vectorized-implementation">
+<h1>Vectorized implementation<a class="headerlink" href="#vectorized-implementation" title="Permalink to this headline">¶</a></h1>
+<p>In the previous section, we’ve illustrated how one could go from a simple implementation taking close to 2 seconds to compute the acceleration of 500 particles down to less than 100 milliseconds using <strong>Numba</strong> and its <em>just-in-time</em> compiling capabilities.
+Doing so did not require any modification of the original code except for the decorator <code class="docutils literal notranslate"><span class="pre">&#64;numba.jit()</span></code>.
+Even though this 20x-25x speed-up might be sufficient, we can do even better.
+We’ll however need to take a step back from the code and reframe the problem slightly differently.</p>
+<div class="section" id="computing-the-pairwise-distance-of-n-points-in-mathbb-r-m">
+<h2>Computing the pairwise distance of <span class="math notranslate nohighlight">\(n\)</span> points in <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span><a class="headerlink" href="#computing-the-pairwise-distance-of-n-points-in-mathbb-r-m" title="Permalink to this headline">¶</a></h2>
+<p>The most intensive part of our simulation is the computation of the pairwise distance (in the <span class="math notranslate nohighlight">\(\ell_2\)</span> norm) between the i<sup>th</sup> and j<sup>th</sup> particles.
+Given the positions vectors <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> and <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>, this (squared) distance can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\| \mathbf{x}_i - \mathbf{x}_j \|^2 = \left( \mathbf{x}_i - \mathbf{x}_j \right)^T \left( \mathbf{x}_i - \mathbf{x}_j \right).
+\]</div>
+<p>The set of all pairwise distances forms the (squared) distance matrix <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>.
+Its <span class="math notranslate nohighlight">\(ij\)</span> entry is given by</p>
+<div class="math notranslate nohighlight">
+\[
+D_{ij} = \| \mathbf{x}_i - \mathbf{x}_j \|^2.
+\]</div>
+<p>The name of the game is thus: <strong>How to compute this distance matrix efficiently?</strong></p>
+<p>The answer to this question requires only a tiny bit of linear algebra.
+Developping the expression for <span class="math notranslate nohighlight">\(D_{ij}\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    D_{ij} &amp; = \| \mathbf{x}_i - \mathbf{x}_j \|^2 \\
+    &amp; = \left( \mathbf{x}_i - \mathbf{x}_j \right)^T \left( \mathbf{x}_i - \mathbf{x}_j \right) \\
+    &amp; = \mathbf{x}_i^T \mathbf{x}_i - 2 \mathbf{x}_i^T \mathbf{x}_j + \mathbf{x}_j^T \mathbf{x}_j.
+\end{aligned}
+\end{split}\]</div>
+<p>The last expression can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[
+D_{ij} = \| \mathbf{x}_i \|^2 - 2 \mathbf{x}_i^T \mathbf{x}_j + \| \mathbf{x}_j \|^2.
+\]</div>
+<p>In matrix notation, <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> can thus be expressed as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{D} = \textrm{diag}(\mathbf{G})^T \mathbf{1}_n - 2 \mathbf{G} + \mathbf{1}_n^T \textrm{diag}(\mathbf{G})
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> Gram matrix given by <span class="math notranslate nohighlight">\(\mathbf{G} = \mathbf{XX}^T\)</span> and <span class="math notranslate nohighlight">\(\mathbf{1}_n\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> column vector of ones.
+Computing the distance matrix like this does not require <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and involves only matrix-vector or matrix-matrix products.
+Under the hood, NumPy relies on <a class="reference external" href="https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms">BLAS</a> to perform such products.
+This will be incredibly faster than using <code class="docutils literal notranslate"><span class="pre">for</span></code> loops in Python.</p>
+<p>The last bit we need to compute is the distance vector <span class="math notranslate nohighlight">\(\Delta \mathbf{x} = \mathbf{x}_j - \mathbf{x}_i\)</span>.
+To avoid using slow <code class="docutils literal notranslate"><span class="pre">for</span></code> loops, we can rely on some NumPy mechanics, namely <strong>broadcasting</strong>, to compute all the pairwise distance vectors in one go.
+For more details about broadcasting, please refer to the dedicated <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy documentation</a>.</p>
+</div>
+<div class="section" id="back-to-the-code">
+<h2>Back to the code<a class="headerlink" href="#back-to-the-code" title="Permalink to this headline">¶</a></h2>
+<p>We now have everything we need to write an incredibly efficient <code class="docutils literal notranslate"><span class="pre">pairwise_interactions</span></code> function.
+The corresponding code is shown below.</p>
+<p><strong><center>Algorithm 2: Vectorized + broadcasting implementation</center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pairwise_interactions</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="c1"># --&gt; Number of particles.</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Gram matrix.</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+    
+    <span class="c1"># --&gt; Squared pairwise distances.</span>
+    <span class="n">diag</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ii-&gt;i&#39;</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+    <span class="n">d2</span> <span class="o">+=</span> <span class="n">diag</span> <span class="o">+</span> <span class="n">diag</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    
+    <span class="c1"># --&gt; Prevent division by 0.</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ii-&gt;i&#39;</span><span class="p">,</span> <span class="n">d2</span><span class="p">)[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="c1"># --&gt; Net forces.</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="n">d2</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span><span class="o">**-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">F</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The calls to <code class="docutils literal notranslate"><span class="pre">np.einseum('ii-&gt;i',</span> <span class="pre">d2)</span></code> creates a <strong>view</strong> of the diagonal of the matrix <code class="docutils literal notranslate"><span class="pre">d2</span></code>.
+This is more efficient memory-wise than actually extracting the diagonal with <code class="docutils literal notranslate"><span class="pre">np.diagonal</span></code>.
+Let’s now benchmark this implementation using again 500 particles randomly located in <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">pairwise_interactions</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.4 ms ± 1.04 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It now takes only approximately 15 to 20 milliseconds!
+This is another 3x or 4x speed-up compared to the <code class="docutils literal notranslate"><span class="pre">numba</span></code> implementation and a 80x to 100x speed-up compared to our original implementation.
+This piece of code can moreover compute the pairwise distance in an arbitrary number of dimensions, as long as you use the Eucliden <span class="math notranslate nohighlight">\(\ell_2\)</span> norm to measure distances.
+These increased performances however come with a piece of code which might be harder to decipher, particularly if you don’t known the linear algebra trick or what broadcasting is.
+This will often be the case.
+Improving the performances of a piece of code most often relies on mathematical tricks or programming mechanics which might obscure what the code is doing.
+This is one of the main reasons why you need to document your code, particularly if you intend to share it with others!</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Physics/NBody"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="naive.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Implementation based on nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="simulation.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Full code for an N-Body simulation</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jean-Christophe Loiseau<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
