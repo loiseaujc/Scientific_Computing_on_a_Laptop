@@ -53,6 +53,11 @@ parts:
     chapters:
       - file: Maths/Overview
         title: Overview
+      - file: Maths/Mandelbrot/Mandelbrot
+        sections:
+          - file: Maths/Mandelbrot/definition
+          - file: Maths/Mandelbrot/binary_mandelbrot
+          - file: Maths/Mandelbrot/buddhabrot
       # - file: Maths/Mandelbrot
       # - file: Maths/Logistic_map
       # - file: Maths/Lorenz
