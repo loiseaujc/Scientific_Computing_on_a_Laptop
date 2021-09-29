@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Definition of the Mandelbrot set &#8212; Scientific computing on a Laptop</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Simple visualizations" href="binary_mandelbrot.html" />
+    <link rel="prev" title="Mandelbrot set" href="Mandelbrot.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific computing on a Laptop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Cover.html">
+   Scientific Computing on a Laptop
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Front Matter
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/table_of_content.html">
+   Table of Contents
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About this book
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/about.html">
+   What is this book?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/what_do_i_need.html">
+   What do I need?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  The Holy Trinity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Quick_Tours/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Large-scale linear algebra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Linalg/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Physics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Physics/Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Physics/NBody/NBody.html">
+   N-Body simulations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/formulation.html">
+     General formulation
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../Physics/NBody/pairwise_distance.html">
+     Computing the pairwise interactions
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/naive.html">
+       Implementation based on nested
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         for
+        </span>
+       </code>
+       loops
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/vectorized.html">
+       Vectorized implementation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/simulation.html">
+     Full code for an N-Body simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Maths
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Mandelbrot.html">
+   Mandelbrot set
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Definition of the Mandelbrot set
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary_mandelbrot.html">
+     Simple visualizations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buddhabrot.html">
+     The Buddhabrot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Biology
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Biology/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Mechanics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Mechanics/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Maths/Mandelbrot/definition.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMaths/Mandelbrot/definition.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-analytical-results">
+   Some analytical results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-cardioid">
+     Main cardioid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#period-2-bulb">
+     Period-2 bulb
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="definition-of-the-mandelbrot-set">
+<h1>Definition of the Mandelbrot set<a class="headerlink" href="#definition-of-the-mandelbrot-set" title="Permalink to this headline">¶</a></h1>
+<p>Let <span class="math notranslate nohighlight">\(f : \mathbb{C} \mapsto \mathbb{C}\)</span> be the quadratic function</p>
+<div class="math notranslate nohighlight">
+\[
+f(z) = z^2 + c
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(c \in \mathbb{C}\)</span>.
+Now, consider the discrete time dynamical system generated by iterating this function with <span class="math notranslate nohighlight">\(z_0 = 0\)</span>, i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+    z_0 &amp; = 0 \\
+    z_{k+1} &amp; = z_k^2 + c \quad \forall \ k \geq 1.
+\end{aligned}
+\end{split}\]</div>
+<p>For some values of <span class="math notranslate nohighlight">\(c\)</span>, <span class="math notranslate nohighlight">\(z_k\)</span> remains bounded as <span class="math notranslate nohighlight">\(k \to \infty\)</span>.
+For others, it blows up.
+This is how the Mandelbrot set is defined.
+It is the set of points <span class="math notranslate nohighlight">\(c \in \mathbb{C}\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{k \to \infty} \vert z_k \vert &lt; \infty.
+\]</div>
+<p>For example <span class="math notranslate nohighlight">\(c = 1\)</span> gives rise to the sequence 0, 1, 2, 5, 25, …, which tends to infinity.
+Hence, <span class="math notranslate nohighlight">\(c = 1\)</span> is not an element of the Mandelbrot set.
+On the other hand, <span class="math notranslate nohighlight">\(c=-1\)</span> yields 0, -1, 0, -1, 0, …, which is bounded.
+As such <span class="math notranslate nohighlight">\(c = -1\)</span> does belong to the Mandelbrot set.</p>
+<div class="section" id="some-analytical-results">
+<h2>Some analytical results<a class="headerlink" href="#some-analytical-results" title="Permalink to this headline">¶</a></h2>
+<p>This definition of the Mandelbrot is not very helpful when it comes to computation as we would need to test every possible values of <span class="math notranslate nohighlight">\(c\)</span> and iterate for long enough to see if the iteration tends to infinity or not.
+Luckily, we do have a few simple analytical results which help us narrow down the portion of the complex plane we need to scan.</p>
+<p>First, it is easy to show by induction that if <span class="math notranslate nohighlight">\(\vert z_k \vert &gt; 2\)</span> for a particular <span class="math notranslate nohighlight">\(c \in \mathbb{C}\)</span>, then the iteration diverges and <span class="math notranslate nohighlight">\(c\)</span> is not the Mandelbrot set.
+This result directly implies that the Mandelbrot set is inscribed in a circle of radius <span class="math notranslate nohighlight">\(2\)</span>, i.e. any <span class="math notranslate nohighlight">\(c\)</span> such that <span class="math notranslate nohighlight">\(\vert c \vert &gt; 2\)</span> is not in the set.
+This already narrows down the portion of the complex plane we need to scan.</p>
+<div class="section" id="main-cardioid">
+<h3>Main cardioid<a class="headerlink" href="#main-cardioid" title="Permalink to this headline">¶</a></h3>
+<p>The most prominent piece of the Mandelbrot set is known as the <em>main cardioid</em>.
+It is the region of the complex plane for which the map <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> has an attracting fixed point.
+It can be shown that its border is given by the set of points <span class="math notranslate nohighlight">\(c\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+c = \dfrac{e^{i\theta}}{2} \left( 1 - \dfrac{e^{i\theta}}{2} \right).
+\]</div>
+<p>This is the equation of a cardioid.</p>
+<p>After some simple manipulations, we can come up with a simple test to check whether a given <span class="math notranslate nohighlight">\(c\)</span> is in the main cardioid or not.
+Let <span class="math notranslate nohighlight">\(x\)</span> (resp. <span class="math notranslate nohighlight">\(y\)</span>) be the real (resp. imaginary) part of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(p = \sqrt{x^2 + y^2}\)</span>.
+The point <span class="math notranslate nohighlight">\(c = x + i y\)</span> is in the main cardioid (and hence in the Mandelbrot set) if</p>
+<div class="math notranslate nohighlight">
+\[
+x \leq p - 2 p^2 + \dfrac{1}{4}.
+\]</div>
+<p>This test can equivalently be performed without the square root.
+Let <span class="math notranslate nohighlight">\(q = \left( x - \dfrac{1}{4} \right)^2 + y^2\)</span>. Then <span class="math notranslate nohighlight">\(c = x + iy\)</span> is in the Mandelbrot set if it verifies</p>
+<div class="math notranslate nohighlight">
+\[
+q \left( q + \left(x - \dfrac{1}{4} \right) \right) \leq \dfrac{1}{4}y^2.
+\]</div>
+<p>This simple check will save us a tremendous amount of computation.</p>
+</div>
+<div class="section" id="period-2-bulb">
+<h3>Period-2 bulb<a class="headerlink" href="#period-2-bulb" title="Permalink to this headline">¶</a></h3>
+<p>Another region of interest is the circle on the left of the main cardioid, attached to it as the point <span class="math notranslate nohighlight">\(c=-\dfrac{3}{4}\)</span>.
+This region of the complex plane correspond to values of <span class="math notranslate nohighlight">\(c\)</span> for which the iteration has an attracting cycle of period 2.
+Using simple arguments, it can be shown that it is an actual circle of radius <span class="math notranslate nohighlight">\(\dfrac{1}{4}\)</span> centered at <span class="math notranslate nohighlight">\(c = -1\)</span>.
+As such, the following test</p>
+<div class="math notranslate nohighlight">
+\[
+\left( x + 1 \right)^2 + y^2 \leq \dfrac{1}{16}
+\]</div>
+<p>will let us know if <span class="math notranslate nohighlight">\(c\)</span> is in the Mandelbrot or not.</p>
+<p>There are infinitely many other bulbs tangent to the main cardioid.
+These are however not exact circles and we do not have such simple tests for them.
+Simply testing for the main cardioid and the period-2 bulb already accounts for a significant portion of the whole Mandelbrot set and will be sufficient to massively reduce the computation time needed to render the Mandelbrot set.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Maths/Mandelbrot"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="Mandelbrot.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Mandelbrot set</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="binary_mandelbrot.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Simple visualizations</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jean-Christophe Loiseau<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

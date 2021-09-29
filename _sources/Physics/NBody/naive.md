@@ -137,7 +137,7 @@ It could also severely reduce the code readability or simply not be obvious at a
 
 In these cases, Python's scientific computing ecosystem has a few extremely useful packages.
 One of them is [**Numba**](https://numba.pydata.org/), an open source *just-in-time* compiler that can translate a subset of Python or NumPy code into fast machine code.
-From Numba's webiste
+From Numba's website
 
 > Numba translates Python functions to optimized machine code at runtime using the industry-standard [LLVM](https://llvm.org/) compiler library. Numba-compiled numerical algorithms in Python can approach the speeds of C or Fortran.
 

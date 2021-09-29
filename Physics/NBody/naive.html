@@ -222,6 +222,33 @@
    Overview
   </a>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Maths/Mandelbrot/Mandelbrot.html">
+   Mandelbrot set
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Maths/Mandelbrot/definition.html">
+     Definition of the Mandelbrot set
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Maths/Mandelbrot/binary_mandelbrot.html">
+     Simple visualizations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Maths/Mandelbrot/buddhabrot.html">
+     The Buddhabrot
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -415,7 +442,7 @@ The <code class="docutils literal notranslate"><span class="pre">%%timeit</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.85 s ± 13.4 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.36 s ± 148 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -470,7 +497,7 @@ The corresponding code is shown below.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.67 s ± 20.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.28 s ± 29.5 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -488,7 +515,7 @@ It could also severely reduce the code readability or simply not be obvious at a
 <a class="reference internal image-reference" href="https://numba.pydata.org/_static/numba-blue-horizontal-rgb.svg"><img alt="https://numba.pydata.org/_static/numba-blue-horizontal-rgb.svg" class="align-left" src="https://numba.pydata.org/_static/numba-blue-horizontal-rgb.svg" width="192px" /></a>
 <p>In these cases, Python’s scientific computing ecosystem has a few extremely useful packages.
 One of them is <a class="reference external" href="https://numba.pydata.org/"><strong>Numba</strong></a>, an open source <em>just-in-time</em> compiler that can translate a subset of Python or NumPy code into fast machine code.
-From Numba’s webiste</p>
+From Numba’s website</p>
 <blockquote>
 <div><p>Numba translates Python functions to optimized machine code at runtime using the industry-standard <a class="reference external" href="https://llvm.org/">LLVM</a> compiler library. Numba-compiled numerical algorithms in Python can approach the speeds of C or Fortran.</p>
 </div></blockquote>
@@ -545,7 +572,7 @@ Let’s now see how it behaves using the same set of 500 particles.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74.1 ms ± 1.57 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68.3 ms ± 42.1 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>

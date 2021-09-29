@@ -1,0 +1,945 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Buddhabrot &#8212; Scientific computing on a Laptop</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Applications in Biology" href="../../Biology/Overview.html" />
+    <link rel="prev" title="Simple visualizations" href="binary_mandelbrot.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific computing on a Laptop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Cover.html">
+   Scientific Computing on a Laptop
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Front Matter
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/table_of_content.html">
+   Table of Contents
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About this book
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/about.html">
+   What is this book?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/what_do_i_need.html">
+   What do I need?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  The Holy Trinity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Quick_Tours/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Large-scale linear algebra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Linalg/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Physics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Physics/Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Physics/NBody/NBody.html">
+   N-Body simulations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/formulation.html">
+     General formulation
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../Physics/NBody/pairwise_distance.html">
+     Computing the pairwise interactions
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/naive.html">
+       Implementation based on nested
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         for
+        </span>
+       </code>
+       loops
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/vectorized.html">
+       Vectorized implementation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/simulation.html">
+     Full code for an N-Body simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Maths
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Mandelbrot.html">
+   Mandelbrot set
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="definition.html">
+     Definition of the Mandelbrot set
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="binary_mandelbrot.html">
+     Simple visualizations
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     The Buddhabrot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Biology
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Biology/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Mechanics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Mechanics/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/Maths/Mandelbrot/buddhabrot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Maths/Mandelbrot/buddhabrot.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMaths/Mandelbrot/buddhabrot.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Maths/Mandelbrot/buddhabrot.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-a-trajectory">
+   Simulating a trajectory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-sampling-of-the-trajectories">
+   Simple sampling of the trajectories
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-smarter-sampling-strategy">
+   A smarter sampling strategy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#to-go-further">
+   To go further
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-buddhabrot">
+<h1>The Buddhabrot<a class="headerlink" href="#the-buddhabrot" title="Permalink to this headline">¶</a></h1>
+<p>Now that we know how to make simple visualizations of the Mandelbrot set, let’s turn our attention to more advanced ones.
+Among these, the most computation-intensive one is probably the <a class="reference external" href="https://en.wikipedia.org/wiki/Buddhabrot">Buddhabrot</a>.
+One of its numerous renderings is shown below.</p>
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Nebulabrot_%285000%2C_500%2C_50%29.png/600px-Nebulabrot_%285000%2C_500%2C_50%29.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Nebulabrot_%285000%2C_500%2C_50%29.png/600px-Nebulabrot_%285000%2C_500%2C_50%29.png" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Nebulabrot_%285000%2C_500%2C_50%29.png/600px-Nebulabrot_%285000%2C_500%2C_50%29.png" style="width: 512px;" /></a>
+</br>
+<p>In the previous section, we made visualizations highlighting if a point <span class="math notranslate nohighlight">\(c \in \mathbb{C}\)</span> is in the Mandelbrot (or not) or how fast the dynamical system <span class="math notranslate nohighlight">\(z_{k+1} = z^2_k + c\)</span> escaped to infinity.
+The Buddhabrot is an entirely different beast.
+Rather than focusing on <span class="math notranslate nohighlight">\(c\)</span>, it depicts the probability distribution over trajectories of points escaping the Mandelbrot set, i.e. the probability distribution of the sequence <span class="math notranslate nohighlight">\(z_{k+1} = z^2_k + c\)</span> for all <span class="math notranslate nohighlight">\(c\)</span>’s outside the Mandelbrot set.
+Hence, not only do we need to determine if <span class="math notranslate nohighlight">\(c\)</span> is the Mandelbrot set, but we also need to keep track of the whole trajectory generated by the associated quadratic function.
+And we need to make sure the image looks nice as well!</p>
+<p>Rendering high resolution images of the Buddhabrot can be incredibly hard.
+Millions, if not billions of unstable trajectories need to be sampled.
+These computations are even more intensive if one wants to zoom in or create an animation.
+Benedikt Bitterli has a nice series of <a class="reference external" href="https://benedikt-bitterli.me/buddhabrot/">blog posts</a> describing how he’s been able to render <a class="reference external" href="https://www.youtube.com/watch?v=zxIcydL7wwY&amp;ab_channel=Thunabrain">this video</a>.
+In the rest of this section, we’ll only try to produce a low-resolution image (300 x 300 pixels) of the Buddhabrot.
+This is already challenging enough!
+It will nonetheless show the basic techniques or ideas you can use to produce higher resolution images (<strong>Caution</strong>: if you do so, you may have to let your code run for quite a while).</p>
+<div class="section" id="simulating-a-trajectory">
+<h2>Simulating a trajectory<a class="headerlink" href="#simulating-a-trajectory" title="Permalink to this headline">¶</a></h2>
+<p>The Buddhabrot is the probability distribution over trajectories of points escaping the Mandelbrot.
+Getting a good estimate of this probability distribution requires the computation of an extremely large number of such trajectories.
+Hence, this is the portion of the code that we need to optimize as much as possible.
+Fortunately, most of the work has already been done in the previous section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">trajectory</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="c1"># --&gt; Compute trajectory.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">maxiter</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numba</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+    <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+        
+        <span class="c1"># --&gt; Update point.</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+        
+        <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+        <span class="c1"># --&gt; Check bailout condition.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x2</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">z</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">trajectory</span></code> is almost identical to the function <code class="docutils literal notranslate"><span class="pre">mandelbrot</span></code> we wrote earlier.
+It takes as input the value of <span class="math notranslate nohighlight">\(c \in \mathbb{C}\)</span> that we consider and the maximum number of iterations <code class="docutils literal notranslate"><span class="pre">maxiter</span></code> beyond which we consider <span class="math notranslate nohighlight">\(c\)</span> to be in the Mandelbrot set.
+However, it no longer returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+Instead, it returns the computed trajectory <code class="docutils literal notranslate"><span class="pre">z</span></code>.
+This is pretty much the only difference with our previous piece of code.</p>
+</div>
+<div class="section" id="simple-sampling-of-the-trajectories">
+<h2>Simple sampling of the trajectories<a class="headerlink" href="#simple-sampling-of-the-trajectories" title="Permalink to this headline">¶</a></h2>
+<p>We know how to simulate efficiently a given trajectory.
+Now, how do we estimate the probability distribution?
+To do so, we need to sample a large number of different <span class="math notranslate nohighlight">\(c\)</span> values and simulate the corresponding trajectories.
+If a given trajectory reaches the maximum number of iterations <code class="docutils literal notranslate"><span class="pre">maxiter</span></code>, it is rejected and a new value for <span class="math notranslate nohighlight">\(c\)</span> is sampled.
+The probability distribution of our data is then obtained using a simple 2D histogram (see <code class="docutils literal notranslate"><span class="pre">np.histogram2d</span></code> for more details).
+This process is re-iterated until our estimate converges.</p>
+<p>The question thus boils down to <strong>how to sample the <span class="math notranslate nohighlight">\(c\)</span> values?</strong>
+Sampling the complex plane <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> uniformly is probably the simplest thing to do.
+Yet, it would be extremely slow.
+However, we do know a few things about the Mandelbrot set</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(c\)</span> is in the main cardioid, it is in the Mandelbrot set.
+Hence, we do not even need to simulate the corresponding trajectory.</p></li>
+<li><p>Similarly, if <span class="math notranslate nohighlight">\(c\)</span> is the period-2 bulb, it is in the Mandelbrot set.
+Once again, we don’t need to simulate the corresponding trajectory.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\vert c \vert &gt; 2\)</span>, <span class="math notranslate nohighlight">\(c\)</span> is the not the set.
+Moreover, the sequence <span class="math notranslate nohighlight">\(z_{k+1} = z_k^2 + c\)</span> grows exponentially fast. The corresponding trajectory would not contribute much to the overall probability distribution.
+Once again, we wouldn’t need to simulate it.</p></li>
+</ul>
+<p>Our first sampling strategy is thus fairly simple:</p>
+<ol class="simple">
+<li><p>Sample <span class="math notranslate nohighlight">\(c\)</span> uniformly in a disk of radius 2 centered at the origin.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(c\)</span> is in the cardioid or in the period-2 bulb, reject it and go back to 1.
+Otherwise, compute the corresponding sequence <span class="math notranslate nohighlight">\(\left\{ z_k \right\}\)</span>.</p></li>
+<li><p>If the sequence <span class="math notranslate nohighlight">\(\left\{ z_k \right\}\)</span> reached the maximum number of iterations allowed, reject it and go back to 1. Otherwise, add it to our dataset.</p></li>
+</ol>
+<p>This process is repeated until we have collected a sufficiently large number of unstable trajectories.
+Once this is done, the probability distribution is estimated using a 2D histogram.
+The number of bins in each direction will determine the size of the Buddhabrot image we’ll render.</p>
+<p>The next few cells implement the different steps of our algorithm.
+The code should be pretty self-explanatory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">uniform_sampling</span><span class="p">():</span>
+
+    <span class="c1"># --&gt; Uniform sampling in disk or radius 2.</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Accept/Reject c.</span>
+    <span class="k">while</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">or</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">uniform_sampling</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_trajectory</span><span class="p">(</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">):</span>
+
+    <span class="n">rejected</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="c1"># --&gt; Sample new trajectory if needed.</span>
+    <span class="k">while</span> <span class="n">rejected</span><span class="p">:</span>
+        <span class="c1"># --&gt; Sample new c value.</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">get_new_sample</span><span class="p">()</span>
+        
+        <span class="c1"># --&gt; New candidate trajectory.</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+        
+        <span class="c1"># --&gt; Accept/Reject trajectory.</span>
+        <span class="n">rejected</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="n">maxiter</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">):</span>
+    
+    <span class="c1"># --&gt; Initial trajectory.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">sample_trajectory</span><span class="p">(</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Add new trajectories to the dataset.</span>
+    <span class="c1">#     We do so until we have at least n points</span>
+    <span class="c1">#     in the dataset.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">sample_trajectory</span><span class="p">(</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_image</span><span class="p">(</span>
+    <span class="n">n</span><span class="p">,</span>                               <span class="c1"># Number of points to include in the dataset.</span>
+    <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>                     <span class="c1"># Maximum number of iterations.</span>
+    <span class="n">get_new_sample</span><span class="o">=</span><span class="n">uniform_sampling</span><span class="p">,</span> <span class="c1"># How to sample c.</span>
+    <span class="n">nx</span><span class="o">=</span><span class="mi">301</span><span class="p">,</span> <span class="n">ny</span><span class="o">=</span><span class="mi">301</span><span class="p">):</span>                 <span class="c1"># Resolution of the final image.</span>
+    
+    <span class="c1"># --&gt; Generate data.</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Generate image.</span>
+    <span class="n">cr</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+    <span class="n">H</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="n">cr</span><span class="p">,</span> <span class="n">ci</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now generate a 300 x 300 image of the Buddhabrot.
+We’ll sample enough trajectories to have at least 1 000 000 points from which to estimate the probability distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">H_naive</span> <span class="o">=</span> <span class="n">compute_image</span><span class="p">(</span><span class="n">nsamples</span> <span class="o">:=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="n">maxiter</span> <span class="o">:=</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4min 39s, sys: 2min 1s, total: 6min 41s
+Wall time: 6min 41s
+</pre></div>
+</div>
+</div>
+</div>
+<p>On my laptop, this computation takes 6 to 8 minutes depending on what I’m doing on the side.
+Our estimate of the probability distribution (i.e. the “Buddhabrot”) is shown below.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">H_naive</span><span class="p">,</span> 
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">inferno</span><span class="p">,</span> 
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bicubic&quot;</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/buddhabrot_11_0.png" class="align-center" src="../../_images/buddhabrot_11_0.png" />
+</div>
+</div>
+<p>The Buddha starts to take shape.
+Yet, the image is still pretty noisy.
+They are two main reasons for that:</p>
+<ol class="simple">
+<li><p>We have not sampled enough trajectories.</p></li>
+<li><p>Most of the trajectories we actually sampled are relatively short ones that do not contribute much to the distribution.</p></li>
+</ol>
+<p>One easy fix would be to sample more trajectories, say ten millions instead of one million.
+As it is, our sampling strategy is however too naïve to render the image in a reasonable amount of time.
+A simple strategy would be change how we sample the <span class="math notranslate nohighlight">\(c\)</span> values to make sure we only sample long enough trajectories.
+This is what we’ll explore next.</p>
+</div>
+<div class="section" id="a-smarter-sampling-strategy">
+<h2>A smarter sampling strategy<a class="headerlink" href="#a-smarter-sampling-strategy" title="Permalink to this headline">¶</a></h2>
+<p>When redering the Mandelbrot set with the <em>escape time algorithm</em>, we observed that points close to the edges of the Mandelbrot set were the ones taking the longest time to escape.
+These are points we want to sample from.
+But how to do it?</p>
+<p>There are many ways in which we could sample these points of interest.
+A simple approach would be to compute the escape time map and select only values of <span class="math notranslate nohighlight">\(c\)</span> which take more than <code class="docutils literal notranslate"><span class="pre">k</span></code> iterations to escape.
+This would be a perfectly valid strategy.
+However I want to illustrate another way using an edge detection technique you can use for image processing.</p>
+<p>Given the black and white image of the Mandelbrot set computed in the previous section, the edges are the set of points were the surrounding pixels change from <code class="docutils literal notranslate"><span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+A simple way to identify these points is to compute the gradient of the image.
+To do so, one can use the <a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel operator</a> already implemented as <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.sobel</span></code>.
+This is illustrated below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">sobel</span>
+
+<span class="c1"># --&gt; Complex plane.</span>
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="mi">3001</span><span class="p">,</span> <span class="mi">2501</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+<span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">cr</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ci</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># --&gt; Compute the Mandelbrot set.</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">)</span>
+
+<span class="c1"># --&gt; Compute its edges.</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/buddhabrot_14_0.png" class="align-center" src="../../_images/buddhabrot_14_0.png" />
+</div>
+</div>
+<p>As you can see, convolving the black and white image of the Mandelbrot set with the Sobel filter indeed detects the edges of the set.
+We can then select only these points as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --&gt; Points from which to sample.</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">edges</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="c1"># --&gt; Scale of the perturbation to be added.</span>
+<span class="n">Δx</span><span class="p">,</span> <span class="n">Δy</span> <span class="o">=</span> <span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ci</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are the points we’ll sample from.
+In order to add a bit more randomness to our sampling algorithm, we’ll also slightly perturb each value of <span class="math notranslate nohighlight">\(c\)</span> we sample from this set of candidate points.
+Our new sampler is implemented in the next cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reject</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">or</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">smart_sampling</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">Δx</span><span class="p">,</span> <span class="n">Δy</span><span class="p">):</span>
+
+    <span class="c1"># --&gt; Perturbation to be added to the sampled point.</span>
+    <span class="n">Δcr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">Δx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Δx</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">Δci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">Δy</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Δy</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">Δc</span> <span class="o">=</span> <span class="n">Δcr</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">Δci</span>
+    
+    <span class="c1"># --&gt; Value of c to be tested.</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cs</span><span class="p">))</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">Δc</span>
+    
+    <span class="k">while</span> <span class="n">reject</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">smart_sampling</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">Δx</span><span class="p">,</span> <span class="n">Δy</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how efficient our renderer becomes.
+We’ll once again sample trajectories until our dataset is made of one million different points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">H_edges</span> <span class="o">=</span> <span class="n">compute_image</span><span class="p">(</span><span class="n">nsamples</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="o">=</span><span class="k">lambda</span> <span class="p">:</span> <span class="n">smart_sampling</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">Δx</span><span class="p">,</span> <span class="n">Δy</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 5.99 s, sys: 4.59 ms, total: 6 s
+Wall time: 6 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>It now takes only a few seconds to sample the required number of points!
+This is a ?x speed-up compared to our naïve sampling strategy.
+We can now render the image of our estimated probability distribution.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">H_naive</span><span class="p">,</span> 
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">inferno</span><span class="p">,</span> 
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bicubic&quot;</span>
+<span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Uniform sampling&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">H_edges</span><span class="p">,</span> 
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">inferno</span><span class="p">,</span> 
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bicubic&quot;</span>
+<span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sampling from the edges&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/buddhabrot_22_0.png" class="align-center" src="../../_images/buddhabrot_22_0.png" />
+</div>
+</div>
+<p>As expected, the image on the right is much cleaner than the one of the left.
+It is much less noisy.
+This is a direct consequence of the fact that we now sample only very good candidate trajectories which contribute significantly to the overall distribution.
+This is even more visible if we apply a power-law normalization of the pixel intensities before rendering the image.
+This can be done with <code class="docutils literal notranslate"><span class="pre">matplotlib.colors.PowerNorm</span></code>.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">H_naive</span><span class="p">,</span> 
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">inferno</span><span class="p">,</span> 
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">PowerNorm</span><span class="p">(</span><span class="n">p</span><span class="p">),</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bicubic&quot;</span>
+<span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Uniform sampling&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+    <span class="n">H_edges</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">inferno</span><span class="p">,</span> 
+    <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">PowerNorm</span><span class="p">(</span><span class="n">p</span><span class="p">),</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;bicubic&quot;</span>
+<span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Sampling from the edges&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/buddhabrot_24_0.png" class="align-center" src="../../_images/buddhabrot_24_0.png" />
+</div>
+</div>
+<p>You now know how to render a Buddhabrot!
+Even though we have massively improved the speed of our renderer by choosing a better sampling strategy, rendering a high-resolution image (e.g. 1024 x 1024 pixels) will take some time as you’ll need to sample hundred of millions of trajectories before your 2D histogram converges.
+Running the code over night or during a whole weekend will probably do.</p>
+</div>
+<div class="section" id="to-go-further">
+<h2>To go further<a class="headerlink" href="#to-go-further" title="Permalink to this headline">¶</a></h2>
+<p>The code we’ve implemented is fairly simple and can be used as the skeleton for more advanced visualizations of the Buddhabrot.
+Whether you are a student keen on taking challenges or a teacher looking for project ideas for your classes, here is a non-exhaustive list of how you can build upon this code:</p>
+<ul class="simple">
+<li><p><strong>False colors:</strong> The very first image of the Buddhabrot shown in this chapter is known as a <a class="reference external" href="https://fr.wikipedia.org/wiki/Fichier:Nebulabrot_(5000,_500,_50).png">Nebulabrot</a>.
+It is a RGB image using techniques by NASA to render images of galaxies.
+Each color channel corresponds to the probability distribution generated by trajectories with different maximum number of iterations (e.g. the red channel only considers trajectories taking less than 100 iterations to escape, the blue channel is made of trajectories taking less than 1000 iterations and the green channel by trajectories taking less than 10 000 iterations).</p></li>
+<li><p><strong>The Anti-Buddhabrot:</strong> The Buddhabrot is the probability distribution over trajectories of points <strong>outside</strong> the Mandelbrot set.
+Only minor modifications of the code are needed to render its dual, the Anti-Buddhabrot, i.e. the probability distribution over trajectories of points <strong>inside</strong> the Mandelbrot set.
+An example is shown below.</p></li>
+</ul>
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/b/ba/Anti-buddabrot.jpg"><img alt="https://upload.wikimedia.org/wikipedia/commons/b/ba/Anti-buddabrot.jpg" class="align-center" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Anti-buddabrot.jpg" style="width: 512px;" /></a>
+</br>
+<ul class="simple">
+<li><p><strong>Zooming-in:</strong> Our sampling strategy is good enough when it comes to rendering full-scale images of the Buddhabrot.
+Zooming-in is a different story.
+Not all points in the vicinity of the edges of the Mandelbrot (nor in <span class="math notranslate nohighlight">\(\mathbb{C}\)</span> for that matters) contribute equally to the probability distribution in a particular region of the complex plane.
+Rendering zoomed-in images of the Buddhabrot thus necessitate a different sampling strategy.
+This is nicely discussed by <a class="reference external" href="https://benedikt-bitterli.me/buddhabrot/">Benedikt Bitterli</a>.
+Exploring different sampling strategies to render zoomed-in versions of the Buddhabrot would be an excellent project for anyone interested in rejection sampling, importance sampling or Markov Chain Monte-Carlo simulations!</p></li>
+<li><p><strong>Going parallel:</strong> Sampling different trajectories is embarrassingly parallel.
+Nowadays, most computers have multiple CPUs and Python offers some utility packages such as <code class="docutils literal notranslate"><span class="pre">joblib</span></code> to exploit these.
+The code below illustrate one possible way to modify the function <code class="docutils literal notranslate"><span class="pre">compute_image</span></code> to sample trajectories in parallel.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span><span class="p">,</span> <span class="n">cpu_count</span>
+<span class="k">def</span> <span class="nf">compute_image</span><span class="p">(</span>
+    <span class="n">n</span><span class="p">,</span> 
+    <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+    <span class="n">get_new_sample</span><span class="o">=</span><span class="n">uniform_sampling</span><span class="p">,</span>
+    <span class="n">nx</span><span class="o">=</span><span class="mi">301</span><span class="p">,</span> <span class="n">ny</span><span class="o">=</span><span class="mi">301</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=</span><span class="n">cpu_count</span><span class="p">()):</span>
+    
+    <span class="c1"># --&gt; Generate data.</span>
+    <span class="k">if</span> <span class="n">n_jobs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">generate_data</span><span class="p">)(</span><span class="n">n</span><span class="o">//</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">,</span> <span class="n">get_new_sample</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_jobs</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># --&gt; Generate image.</span>
+    <span class="n">cr</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+    <span class="n">H</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="n">cr</span><span class="p">,</span> <span class="n">ci</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For more advanced project ideas, you can also think about porting some portions of the code to GPUs or combining false colors images and zooms to make a video deep-diving into the Buddhabrot!
+Such a project might take some serious computation time.
+Be aware that, if you want to go this way, you may need more than just your laptop…</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Maths/Mandelbrot"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="binary_mandelbrot.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Simple visualizations</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../../Biology/Overview.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Applications in Biology</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jean-Christophe Loiseau<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -179,7 +179,7 @@ HTML(anim.to_html5_video())
 
 The code is now yours to play with!
 You can consider any initial arrangement of particles you'd like.
-Note however that, since we implemented a **particle-particle method**, the computation rapidly gets extremely expansive as you increase the number of particles.
+Note however that, since we implemented a **particle-particle method**, the computation rapidly gets extremely expensive as you increase the number of particles.
 You can try to see how many you can simulate in a reasonnable time on your own laptop.
 
 ## Project ideas to go further

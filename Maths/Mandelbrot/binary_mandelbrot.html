@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple visualizations &#8212; Scientific computing on a Laptop</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The Buddhabrot" href="buddhabrot.html" />
+    <link rel="prev" title="Definition of the Mandelbrot set" href="definition.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Scientific computing on a Laptop</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Cover.html">
+   Scientific Computing on a Laptop
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Front Matter
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../FrontMatter/table_of_content.html">
+   Table of Contents
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About this book
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/about.html">
+   What is this book?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../About/what_do_i_need.html">
+   What do I need?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  The Holy Trinity
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Quick_Tours/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Large-scale linear algebra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Linalg/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Physics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Physics/Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../Physics/NBody/NBody.html">
+   N-Body simulations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/formulation.html">
+     General formulation
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../Physics/NBody/pairwise_distance.html">
+     Computing the pairwise interactions
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/naive.html">
+       Implementation based on nested
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         for
+        </span>
+       </code>
+       loops
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../Physics/NBody/vectorized.html">
+       Vectorized implementation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../Physics/NBody/simulation.html">
+     Full code for an N-Body simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Maths
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Mandelbrot.html">
+   Mandelbrot set
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="definition.html">
+     Definition of the Mandelbrot set
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Simple visualizations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buddhabrot.html">
+     The Buddhabrot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Biology
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Biology/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Applications in Mechanics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Mechanics/Overview.html">
+   Overview
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../../_sources/Maths/Mandelbrot/binary_mandelbrot.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Maths/Mandelbrot/binary_mandelbrot.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMaths/Mandelbrot/binary_mandelbrot.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Maths/Mandelbrot/binary_mandelbrot.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#excluding-points-from-the-main-cardioid">
+   Excluding points from the main cardioid
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vectorizing-the-code">
+   Vectorizing the code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jit-implementation-with-numba">
+   JIT implementation with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     numba
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#black-and-white-visualization">
+   Black and white visualization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-some-colours">
+   Adding some colours
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="simple-visualizations">
+<h1>Simple visualizations<a class="headerlink" href="#simple-visualizations" title="Permalink to this headline">¶</a></h1>
+<p>Before getting into advanced visualizations such as <a class="reference external" href="https://en.wikipedia.org/wiki/Buddhabrot">Buddhabrot</a>, let’s start simple.
+Our goal for the moment will be to produce a black and white image of the Mandelbrot set.
+Points belonging to the set will be shown in black and those outside in white.
+The code below shows the algorithm students are most likely to come up with.</p>
+<p><strong><center>Algorithm 1: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops</center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># --&gt; Boolean mask of the Mandelbrot set.</span>
+    <span class="c1">#     Assume by default that all points are in the set.</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Loop through the points in complex plane.</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            
+            <span class="c1"># --&gt; Initial condition.</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+            
+            <span class="c1"># --&gt; Loop until | z | &gt; 2.</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                
+                <span class="c1"># --&gt; Check exit condition.</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># c[i, j] not in the set.</span>
+                    <span class="k">break</span>
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code is pretty simple.
+It takes as input all the points used to discretize the complex plane (as a 2D array).
+For each of them, it iterates the quadratic function for <code class="docutils literal notranslate"><span class="pre">maxiter</span></code> iterations.
+If during this process <span class="math notranslate nohighlight">\(\vert z_k \vert &gt; 2\)</span>, <span class="math notranslate nohighlight">\(c_{ij}\)</span> does not belong to the Mandelbrot set.
+If the iteration runs until <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">maxiter</span></code>, we’ll assume for all intents and purposes that <span class="math notranslate nohighlight">\(c_{ij}\)</span> is in the set (although it may not in reality but that may require a far larger number of iterations).</p>
+<p>Let’s now benchmark this first implementation.
+We’ll assume <span class="math notranslate nohighlight">\(c \in \left[-2.25, 0.75\right] \times \left[ -1.25i, 1.25i\right]\)</span> and consider a relatively coarse discretization to begin with.
+The real axis is discretized with 300 points the while imaginary one is discretized with 251 points.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --&gt; Mesh the complex plane.</span>
+<span class="n">cr</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">251</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">cr</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ci</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># Broadcasting trick.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.3 s ± 837 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>On my laptop, this computation takes a bit more than half a minute.
+A high-resolution image of the Mandelbrot set typically uses ten times as many points in both directions compared to our low-resolution discretization.
+This would incur approximately a 100 fold increase in computational time (i.e. more than one hour).
+While this might be acceptable for a one-shot image, deep diving into the Mandelbrot set with thousands of images to generate is out of reach.</p>
+<div class="section" id="excluding-points-from-the-main-cardioid">
+<h2>Excluding points from the main cardioid<a class="headerlink" href="#excluding-points-from-the-main-cardioid" title="Permalink to this headline">¶</a></h2>
+<p>In <strong>Algorithm 1</strong>, we iterate the quadratic function for all the points discretizing the complex plane.
+Yet, as shown in the previous section, we know analytically that some points actually belong to the Mandelbrot set.
+In particular, we have analytical expressions to test whether <span class="math notranslate nohighlight">\(c\)</span> is the main cardioid or in the period-2 bulb, both being parts of the Mandelbrot set.</p>
+<p><strong><center>Algorithm 2: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops + test for the main cardiod</center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">q</span><span class="o">*</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span>
+    
+<span class="k">def</span> <span class="nf">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">16</span>
+
+<span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># --&gt; Boolean mask of the Mandelbrot set.</span>
+    <span class="c1">#     Assume by default that all points are in the set.</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Loop through the points in complex plane.</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            
+            <span class="c1"># --&gt; Check if point is the main cardioid.</span>
+            <span class="k">if</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]):</span> <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]):</span> <span class="k">continue</span>
+            
+            <span class="c1"># --&gt; Initial condition.</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+            
+            <span class="c1"># --&gt; Loop until | z | &gt; 2.</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                
+                <span class="c1"># --&gt; Check exit condition.</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># c[i, j] not in the set.</span>
+                    <span class="k">break</span>
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.27 s ± 14.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The same computation now takes less than 5 seconds, a 7x speed-up compared to when we didn’t check if <span class="math notranslate nohighlight">\(c\)</span> belongs to the main cardioid.
+If <span class="math notranslate nohighlight">\(c\)</span> is not in the main cardioid, similar tests could be implemented to test if it instead belongs to some <strong>period bulbs</strong>.
+This could also save us a few additional seconds to render the image.</p>
+</div>
+<div class="section" id="vectorizing-the-code">
+<h2>Vectorizing the code<a class="headerlink" href="#vectorizing-the-code" title="Permalink to this headline">¶</a></h2>
+<p>Although we’ve achieved quite a significant speed-up, one major issue with our previous code is that it’ll work only if the input <code class="docutils literal notranslate"><span class="pre">c</span></code> is a <code class="docutils literal notranslate"><span class="pre">np.array</span></code>.
+Hence, we cannot use it to check if a particular value of <span class="math notranslate nohighlight">\(c\)</span> is in the Mandelbrot set or not.
+In <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, a function that works both for a scalar or an array as input is known as a <a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">universal function</a>, or <strong>ufunc</strong> in short.
+<code class="docutils literal notranslate"><span class="pre">np.exp</span></code>, <code class="docutils literal notranslate"><span class="pre">np.cos</span></code> and others are all ufuncs.
+A universal function is a function that operates on <code class="docutils literal notranslate"><span class="pre">np.array</span></code> in an element-by-element fashion.
+It also supports broadcasting, type casting and several other standard <code class="docutils literal notranslate"><span class="pre">numpy</span></code> features.
+To some extent, a ufunc can be understood as a “vectorized” wrapper for a function that takes a fixed number of specific inputs and produces a fixed number of specific outputs.</p>
+<p>NumPy provides a simple utility, <code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code>, to create user-defined ufuncs.
+In what follows, we’ll thus implement a function <code class="docutils literal notranslate"><span class="pre">mandelbrot</span></code> taking as input a single value of <span class="math notranslate nohighlight">\(c\)</span> and returning whether it belongs to the Mandelbrot set or not.
+We’ll then make it work for array input using the decorator <code class="docutils literal notranslate"><span class="pre">&#64;np.vectorize</span></code>.</p>
+<p><strong><center>Algorithm 3: Cleaner code with <code class="docutils literal notranslate"><span class="pre">&#64;np.vectorize</span></code></center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, this new piece of code is now much cleaner than our previous implementation.
+We did not really get rid of the first two nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops though.
+They are somehow hidden in the magic numpy is doing to transform our function.
+Yet, it is now more general as it’ll accept both scalar values and arrays as input.
+Let’s benchmark it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.82 s ± 13.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code now takes only 3 seconds to execute, another 2x speed-up!
+Despite what the name <code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code> suggests, our function is not truly vectorized.
+It still operates on an element-wise fashion rather than on the whole array at once.
+The small speed-up essentially comes from tricks used by the NumPy developers.
+In comparison, the code below shows what a truly vectorized implementation looks like.
+Its drawback however is that it can only operate on arrays and not scalar values.</p>
+<p><strong><center>Algorithm 4: True vectorization in <code class="docutils literal notranslate"><span class="pre">numpy</span></code></center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># --&gt; Boolean mask of the Mandelbrot set.</span>
+    <span class="c1">#     Assume of all points are in the set by default.</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    
+    <span class="c1"># --&gt; Vectorized initial condition.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="c1"># --&gt; Iterate.</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">M</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">M</span><span class="p">]</span>
+        
+        <span class="c1"># --&gt; Check escape condition.</span>
+        <span class="c1">#     Escaped points are no longer iterated.</span>
+        <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        
+    <span class="k">return</span> <span class="n">M</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.06 s ± 8.39 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The true vectorized implementation (without the test for the cardioid and period-2 bulb) is 2 times faster than the one obtained from <code class="docutils literal notranslate"><span class="pre">np.vectorize</span></code>.
+Had we considered the test for the main cardioid, it would have been even faster even though we would have had to play a bit with boolean logic on arrays.</p>
+</div>
+<div class="section" id="jit-implementation-with-numba">
+<h2>JIT implementation with <code class="docutils literal notranslate"><span class="pre">numba</span></code><a class="headerlink" href="#jit-implementation-with-numba" title="Permalink to this headline">¶</a></h2>
+<p>Computing the Mandelbrot set essentially involves nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.
+Yet, <code class="docutils literal notranslate"><span class="pre">for</span></code> loops are terribly inefficient in pure Python.
+In these cases, Python’s scientific computing ecosystem has a few extremely useful packages.
+One of them is <a class="reference external" href="https://numba.pydata.org/"><strong>Numba</strong></a>, an open source <em>just-in-time</em> compiler that can translate a subset of Python or NumPy code into fast machine code.
+From Numba’s website</p>
+<blockquote>
+<div><p>Numba translates Python functions to optimized machine code at runtime using the industry-standard <a class="reference external" href="https://llvm.org/">LLVM</a> compiler library. Numba-compiled numerical algorithms in Python can approach the speeds of C or Fortran.</p>
+</div></blockquote>
+<p>What Numba does basically is to take your naïve Python implementation and generates on-the-fly specialized machine code for different array data types and layouts to optimize performance.</p>
+<div class="danger admonition">
+<p class="admonition-title">Be careful though…</p>
+<p>At first, Numba may seem kind of magic and you may be tempted to use it on all your different pieces of code.
+It may not however bring the speed-up you expected it would!
+For more details about when to use or not Numba JIT capabilities, please read <a class="reference external" href="https://numba.readthedocs.io/en/stable/user/5minguide.html">Numba’s documentation</a>.</p>
+</div>
+<p>Despite what we’ve just said, our function <code class="docutils literal notranslate"><span class="pre">mandelbrot</span></code> is luckily an excellent candidate to illustrate the massive speed-up Numba can bring.
+After having imported <code class="docutils literal notranslate"><span class="pre">numba</span></code>, using its JIT capabilities is as simple as adding the decorator <code class="docutils literal notranslate"><span class="pre">&#64;numba.jit()</span></code> to your function.
+To create a <strong>ufunc</strong>, you can use the <code class="docutils literal notranslate"><span class="pre">&#64;numba.vectorize</span></code> decorator.
+This is illustrated below.</p>
+<p><strong><center>Algorithm 5: Universal function with <code class="docutils literal notranslate"><span class="pre">numba.vectorize</span></code></center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numba</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">q</span><span class="o">*</span><span class="p">(</span><span class="n">q</span> <span class="o">+</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">real</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">16</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="c1"># --&gt; Check if point is in main cardioid.</span>
+    <span class="k">if</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+    
+    <span class="c1"># --&gt; If not, check if it is nonetheless in the</span>
+    <span class="c1">#     Mandelbrot set.</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21 ms ± 603 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>One limitation of ufuncs generated with <code class="docutils literal notranslate"><span class="pre">numba</span></code> is that they do not accept optional arguments (although you can hack you way into it).
+You have to pass all of the arguments.
+In all respect, this is a fairly small price given that our code now runs in 20 milliseconds, a whooping 1700x speed-up compared to our original implementation!
+As you increase the resolution, this speed-up will get even larger.</p>
+<p>Now that we have achieved a more than significant speed-up compared to our original implementation using fairly simple programming techniques, we can start to think about further optimizing the code.
+In particular, we can get rid of complex arithmetic and transform everything into real one.
+Moreover, there are some redundant multiplications we can get rid of.
+The code below does just that.</p>
+<p><strong><center>Algorithm 6: Further optimizations</center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="c1"># --&gt; Check if point is in main cardioid.</span>
+    <span class="k">if</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="kc">True</span>
+    
+    <span class="c1"># --&gt; If not, check if it is nonetheless in the</span>
+    <span class="c1">#     Mandelbrot set.</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x2</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+            
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.82 ms ± 10.1 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using this optimized code gives us an additional 2-3x speed-up, or a grand total of almost 4000x speed-up compared to the pure Python code.
+As an exercise, try to figure out why writing the code this way is faster than the one provided in Algorithm 5.</p>
+<p><strong>Optimizing a code</strong></p>
+<p>When it comes to optimizing a code, particularly in terms of operations count, remember famous computer scientist <a class="reference external" href="https://en.wikipedia.org/wiki/Donald_Knuth">Donal Knuth</a></p>
+<blockquote>
+<div><p>Premature optimization is the root of all evil.</p>
+</div></blockquote>
+<p>Such optimizations should really come only once you’ve already exhausted all the possibilities offered by simpler programming techniques.
+Moreover, you should not try to optimize your whole code.
+That would rapidly be a waste of time!
+Instead, first come up with a fairly simple yet efficient implementation.
+Then, try to identify the most important bottlenecks and optimize only these, not the rest of the code.
+This will be a better use of your limited time!</p>
+</div>
+<div class="section" id="black-and-white-visualization">
+<h2>Black and white visualization<a class="headerlink" href="#black-and-white-visualization" title="Permalink to this headline">¶</a></h2>
+<p>We are now ready to generate our first high-resolution image of the Mandelbrot set.
+We’ll once again consider <span class="math notranslate nohighlight">\(c \in \left[-2.25, 0.75\right] \times \left[ -1.25i, 1.25i\right]\)</span>.
+The real axis will now be discretized using 3000 points, while the imaginary one is discretized with 2501 points.
+For each point (provided it is not in the main cardioid), the quadratic function will be iterated up to 1000 times to check whether the point is in the Mandelbrot set or not.
+The code is shown in the cell below (you can toggle it).
+The <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> code used to generate the image is fairly simple and won’t be discussed.
+We could also have used <code class="docutils literal notranslate"><span class="pre">PIL</span></code> instead, another Python package for images.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --&gt; Mesh the complex plane.</span>
+<span class="n">cr</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">3000</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mi">2501</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">cr</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">ci</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># Broadcasting trick.</span>
+
+<span class="c1"># --&gt; Get points in/out the Mandelbrot set.</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">2.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">]):</span>
+
+    <span class="c1"># --&gt; Simple binary visualization.</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+        <span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> 
+        <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span>
+    
+<span class="n">plot</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/binary_mandelbrot_23_0.png" class="align-center" src="../../_images/binary_mandelbrot_23_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="adding-some-colours">
+<h2>Adding some colours<a class="headerlink" href="#adding-some-colours" title="Permalink to this headline">¶</a></h2>
+<p>I remember pretty clearly the first time I generated this black and white image of the Mandelbrot set as a student.
+My code probably involved a bunch of nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and was written in MATLAB or SciLab.
+It was slow. Painfully slow.
+Yet, it gave me immense joy.
+YouTube was not yet a thing, and I found out only a couple of years later about all the crazy way you could use to render the Mandelbrot set.
+So let’s add some colours to our image!</p>
+<p>Until now, our piece of code only gives a yes-no answer.
+Either the point is in the Mandelbrot set and the corresponding pixel is colored in black, or it is not and the pixel is colored in white.
+The <strong>escape time algorithm</strong> is the second simplest method to render the Mandelbrot set and gives us more nuance.
+Rather than simply having this yes-no answer, we’ll keep track of how many iterations were needed to escape if <span class="math notranslate nohighlight">\(c\)</span> is not part of the Mandelbrot set and color the pixel accordingly using any colormap you want.
+This requires very little modification of our original code.</p>
+<p><strong><center>Escape time algorithm</center></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@numba</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">maxiter</span><span class="p">):</span>
+    <span class="c1"># --&gt; Check if point is in main cardioid.</span>
+    <span class="k">if</span> <span class="n">in_main_cardioid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="n">maxiter</span>
+    <span class="k">if</span> <span class="n">in_period2bulb</span><span class="p">(</span><span class="n">c</span><span class="p">):</span> <span class="k">return</span> <span class="n">maxiter</span>
+    
+    <span class="c1"># --&gt; If not, check if it is nonetheless in the</span>
+    <span class="c1">#     Mandelbrot set.</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x2</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+            
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">imag</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">real</span>
+        <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span>
+
+    <span class="k">return</span> <span class="n">maxiter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it! Literally! The escape time algorithm is as simple as replacing the <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> return with the number of iterations it took to escape.
+Let’s now render some Mandelbrot sets.
+We’ll use colormaps from the <code class="docutils literal notranslate"><span class="pre">cmasher</span></code> package.
+Check out its <a class="reference external" href="https://cmasher.readthedocs.io/index.html">webpage</a> if you want to install it.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/binary_mandelbrot_27_0.png" class="align-center" src="../../_images/binary_mandelbrot_27_0.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/binary_mandelbrot_28_0.png" class="align-center" src="../../_images/binary_mandelbrot_28_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Maths/Mandelbrot"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="definition.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Definition of the Mandelbrot set</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="buddhabrot.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">The Buddhabrot</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jean-Christophe Loiseau<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
